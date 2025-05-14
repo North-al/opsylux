@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /
+    context-path: /v1/api
 
 spring:
   datasource:
@@ -20,3 +20,7 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-delete-value: 1
       logic-not-delete-value: 0
+
+springdoc:
+  api-docs:
+    path: /docs
