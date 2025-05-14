@@ -1,12 +1,15 @@
 package online.northal.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import online.northal.domain.BaseEntity;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 @Data
-public class SysUser implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class SysUser extends BaseEntity implements Serializable  {
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -22,12 +25,11 @@ public class SysUser implements Serializable {
     private String phone;
 
     private int gender;
+
     private int status;
+
     private String avatar;
 
-    private Date createdAt;
-
-    private Date updatedAt;
-
+    @TableLogic
     private int deleted;
 }

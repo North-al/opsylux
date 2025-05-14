@@ -1,13 +1,14 @@
 package online.northal.controller;
 
 import online.northal.domain.entity.SysUser;
+import online.northal.dto.auth.LoginRequestDTO;
 import online.northal.response.ActionResult;
 import online.northal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -16,10 +17,10 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/login")
-    public ActionResult<SysUser> login() {
-        SysUser user = userService.getUserById(1L);
-        return ActionResult.success(user);
+    @PostMapping("/login")
+    public ActionResult<String> login(@RequestBody @Valid LoginRequestDTO dto) {
+        String login = userService.login(dto);
+        return ActionResult.success(login);
     }
 
     @GetMapping("/test")

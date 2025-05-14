@@ -27,6 +27,8 @@
         <mybatis.version>2.3.0</mybatis.version>
         <mybatis-plus.version>3.5.12</mybatis-plus.version>
         <mysql.version>8.0.33</mysql.version>
+        <validation.version>2.0.1.Final</validation.version>
+        <spring-validation.version>2.5.15</spring-validation.version>
     </properties>
 
     <profiles>
@@ -107,6 +109,25 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>javax.validation</groupId>-->
+<!--                <artifactId>validation-api</artifactId>-->
+<!--                <version>${validation.version}</version>-->
+<!--            </dependency>-->
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+                <version>${spring-validation.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

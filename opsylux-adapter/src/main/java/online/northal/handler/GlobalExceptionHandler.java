@@ -2,10 +2,18 @@ package online.northal.handler;
 
 
 import lombok.extern.slf4j.Slf4j;
+import online.northal.enums.ResultCode;
 import online.northal.exception.BaseException;
 import online.northal.response.ActionResult;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -21,9 +29,19 @@ public class GlobalExceptionHandler {
         return ActionResult.fail(e.getCode(), e.getMessage());
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ActionResult<?> handleValidException(MethodArgumentNotValidException ex) {
+        String errorMessage = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.joining(", "));
+        return ActionResult.fail(ResultCode.VALIDATE_FAILED.getCode(), errorMessage);
+    }
+
     @ExceptionHandler(Exception.class)
     public ActionResult<?> handleSystemException(Exception e) {
-        log.error("[系统异常] {}", e.getMessage(), e);
+        log.error("[系统异常]", e);
         return ActionResult.fail(500, "系统繁忙，请稍后再试");
     }
 }
