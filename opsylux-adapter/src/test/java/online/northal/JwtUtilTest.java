@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = OpsyluxApplication.class)
 public class JwtUtilTest {
 
     @Autowired
@@ -14,6 +14,6 @@ public class JwtUtilTest {
 
     @Test
     public void test() {
-        this.jwtUtil.generateToken("1", "North");
+        System.out.println(this.jwtUtil.generateToken(1L, "North"));
     }
 }

@@ -7,6 +7,7 @@ import online.northal.exception.BizException;
 import online.northal.mapper.UserMapper;
 import online.northal.domain.entity.SysUser;
 import online.northal.service.UserService;
+import online.northal.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
 
     public SysUser getUserById(Long id) {
@@ -28,7 +33,13 @@ public class UserServiceImpl implements UserService {
         LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SysUser::getUsername, dto.getUsername());
         SysUser user = userMapper.selectOne(queryWrapper);
-        return user.getUsername();
+//        if (user == null) throw new BizException("userService login", "user not found");
+//
+//        if (!user.getPassword().equals(dto.getPassword())) throw new BizException("userService login", "password not match");
+
+        String token = this.jwtUtil.generateToken(user.getId(), user.getUsername());
+
+        return token;
     }
 
 }

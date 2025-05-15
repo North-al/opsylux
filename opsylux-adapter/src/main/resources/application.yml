@@ -31,6 +31,6 @@ springdoc:
     path: /docs
 
 jwt:
-  secret: opsyluxSecretKey
+  secret: opsyluxSecretKey_@%@%!*^*&!^#&N1289Hw@el##
   expire: 3600000 # 毫秒 = 1小时
   header: Authorization
