@@ -3,6 +3,7 @@ server:
   servlet:
     context-path: /v1/api
 
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -15,6 +16,8 @@ spring:
     host: localhost
     password:
     database: 0
+  main:
+    banner-mode: off
 
 mybatis-plus:
   configuration:
@@ -34,3 +37,7 @@ jwt:
   secret: opsyluxSecretKey_@%@%!*^*&!^#&N1289Hw@el##
   expire: 3600000 # 毫秒 = 1小时
   header: Authorization
+
+logging:
+  level:
+    root: info

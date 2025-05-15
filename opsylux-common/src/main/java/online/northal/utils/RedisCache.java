@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-//@Component
+import java.util.concurrent.TimeUnit;
+
+@Component
 public class RedisCache {
 
     @Autowired
@@ -15,8 +17,14 @@ public class RedisCache {
         redisTemplate.opsForValue().set(key, value);
     }
 
+    /**
+     * 设置有效时间
+     *
+     * @param key Redis键
+     * @param timeout 超时时间 (单位：毫秒)
+     */
     public <T> void set(String key, T value, long timeout) {
-        redisTemplate.opsForValue().set(key, value, timeout);
+        redisTemplate.opsForValue().set(key, value, timeout, TimeUnit.MILLISECONDS);
     }
 
     public <T> T get(String key) {
@@ -27,6 +35,4 @@ public class RedisCache {
 
         return (T) o;
     }
-
-
 }
