@@ -23,8 +23,6 @@ public class UserServiceImpl implements UserService {
 
 
     public SysUser getUserById(Long id) {
-//        if (true) throw new BizException("userService getUserById", "user not found");
-        int i = 1/0;
         return userMapper.selectById(id);
     }
 
@@ -33,13 +31,10 @@ public class UserServiceImpl implements UserService {
         LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SysUser::getUsername, dto.getUsername());
         SysUser user = userMapper.selectOne(queryWrapper);
-//        if (user == null) throw new BizException("userService login", "user not found");
-//
-//        if (!user.getPassword().equals(dto.getPassword())) throw new BizException("userService login", "password not match");
+        if (user == null) throw new BizException("userService login", "当前账号不存在");
 
-        String token = this.jwtUtil.generateToken(user.getId(), user.getUsername());
+        if (!user.getPassword().equals(dto.getPassword())) throw new BizException("userService login", "账号或密码错误", dto);
 
-        return token;
+        return this.jwtUtil.generateToken(user.getId(), user.getUsername());
     }
-
 }
