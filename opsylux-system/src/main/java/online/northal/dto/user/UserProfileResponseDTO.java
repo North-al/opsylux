@@ -1,24 +1,30 @@
 package online.northal.dto.user;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import online.northal.domain.entity.SysUser;
 
-@Data
-@Builder
-public class UserProfileResponseDTO {
-        /** 用户id*/
-        @Schema(description = "用户id")
-        private Long id;
-        private String username;
-        private String email;
-        private String phone;
-        private String avatar;
-        private String nickname;
-        private Integer gender;
-        private Integer status;
-        private String genderText;
-        private String statusText;
-        private String createdAt;
-        private String updatedAt;
+public class UserProfileResponseDTO extends SysUser {
+
+    // 返回状态码字符串，用@JsonProperty指定序列化字段名为status
+    @JsonProperty("status")
+    public Integer getStatusCode() {
+        return super.getStatus() != null ? super.getStatus().getCode() : null;
+    }
+
+    // 返回状态文本
+    @JsonProperty("statusText")
+    public String getStatusText() {
+        return super.getStatus() != null ? super.getStatus().getText() : "未知";
+    }
+
+    @JsonProperty("gender")
+    public Integer getGenderCode() {
+        return super.getGender() != null ? super.getGender().getCode() : null;
+    }
+
+    // 返回性别文本
+    @JsonProperty("genderText")
+    public String getGenderText() {
+        return super.getGender() != null ? super.getGender().getText() : "未知";
+    }
 }

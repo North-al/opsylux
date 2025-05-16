@@ -1,6 +1,7 @@
 package online.northal.service;
 
 import online.northal.domain.entity.SysUser;
+import online.northal.dto.user.UserSaveRequestDTO;
 
 public interface IUserService {
     SysUser getUserById(Long id);
@@ -10,4 +11,11 @@ public interface IUserService {
     SysUser getUserByEmail(String email);
 
     SysUser getUserByEmailOrUsername(String emailOrUsername);
+
+    Long saveUser(UserSaveRequestDTO user);
+
+    boolean updateUser(UserSaveRequestDTO user);
+
+    boolean deleteUser(Long id);
+
 }

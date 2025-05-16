@@ -76,4 +76,9 @@ public class ActionResult<T> implements Serializable {
     public static <T> ActionResult<T> fail(ResultCode code) {
         return new ActionResult<>(code.getCode(), null, code.getMessage());
     }
+
+    /** 失败（500错误 + 传递data和message）*/
+    public static <T> ActionResult<T> fail(T data, String message) {
+        return new ActionResult<>(ResultCode.ERROR.getCode(), data, message);
+    }
 }

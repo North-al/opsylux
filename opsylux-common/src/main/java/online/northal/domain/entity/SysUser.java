@@ -2,12 +2,15 @@ package online.northal.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import online.northal.base.BaseEntity;
+import online.northal.enums.UserGender;
+import online.northal.enums.UserStatus;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode(callSuper = true)
 public class SysUser extends BaseEntity {
 
@@ -15,6 +18,7 @@ public class SysUser extends BaseEntity {
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     private String nickname;
@@ -23,12 +27,13 @@ public class SysUser extends BaseEntity {
 
     private String phone;
 
-    private int gender;
+    private UserGender gender;
 
-    private int status;
+    private UserStatus status;
 
     private String avatar;
 
+    @JsonIgnore
     @TableLogic
     private int deleted;
 }
