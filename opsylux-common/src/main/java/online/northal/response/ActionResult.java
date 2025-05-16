@@ -1,5 +1,6 @@
 package online.northal.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,12 +21,15 @@ import java.io.Serializable;
 public class ActionResult<T> implements Serializable {
 
     /** 状态码 */
+    @Schema(description = "状态码", example = "200")
     private Integer code;
 
     /** 返回数据 */
+    @Schema(description = "返回的数据对象")
     private T data;
 
     /** 返回提示信息 */
+    @Schema(description = "返回信息", example = "操作成功")
     private String message;
 
     /** 成功（无数据） */

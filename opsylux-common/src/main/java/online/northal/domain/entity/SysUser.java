@@ -1,16 +1,15 @@
 package online.northal.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import online.northal.domain.BaseEntity;
-
-import java.io.Serializable;
+import online.northal.base.BaseEntity;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SysUser extends BaseEntity implements Serializable  {
-    private static final long serialVersionUID = 1L;
+public class SysUser extends BaseEntity {
 
     private Long id;
 

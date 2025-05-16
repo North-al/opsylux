@@ -1,10 +1,9 @@
-package online.northal.domain;
+package online.northal.base;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class BaseEntity implements Serializable {

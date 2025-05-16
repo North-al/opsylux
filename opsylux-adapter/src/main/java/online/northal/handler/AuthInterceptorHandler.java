@@ -1,9 +1,11 @@
 package online.northal.handler;
 
 import io.jsonwebtoken.Claims;
+import online.northal.domain.entity.SysUser;
 import online.northal.exception.UnauthorizedException;
 import online.northal.utils.JwtUtil;
 import online.northal.utils.RedisCache;
+import online.northal.utils.UserHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -37,8 +39,12 @@ public class AuthInterceptorHandler implements HandlerInterceptor {
             throw new UnauthorizedException("登录已过期，请重新登录");
         }
 
-        String username = claims.get("userId").toString();
-        request.setAttribute("username", username);
+        String username = claims.get("username").toString();
+        String userId = claims.get("userId").toString();
+        SysUser user = new SysUser();
+        user.setId(Long.valueOf(userId));
+        user.setUsername(username);
+        UserHolder.set(user);
 
 //        TODO: Redis token验证
 
