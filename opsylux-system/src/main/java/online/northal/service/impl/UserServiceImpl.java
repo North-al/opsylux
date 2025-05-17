@@ -1,6 +1,9 @@
 package online.northal.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import online.northal.base.BasePage;
 import online.northal.domain.entity.SysUser;
 import online.northal.dto.user.UserSaveRequestDTO;
 import online.northal.mapper.UserMapper;
@@ -73,5 +76,12 @@ public class UserServiceImpl implements IUserService {
     public boolean deleteUser(Long id) {
         int delete = this.userMapper.deleteById(id);
         return delete > 0;
+    }
+
+    @Override
+    public IPage<SysUser> getUserByPage(BasePage page) {
+        LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(page.getKeyword() != null, SysUser::getUsername, page.getKeyword());
+        return this.userMapper.selectPage(page.toPage(), queryWrapper);
     }
 }

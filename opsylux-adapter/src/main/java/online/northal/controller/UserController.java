@@ -1,9 +1,12 @@
 package online.northal.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import online.northal.base.BaseController;
+import online.northal.base.BasePage;
 import online.northal.domain.entity.SysUser;
 import online.northal.dto.user.UserProfileResponseDTO;
 import online.northal.dto.user.UserSaveRequestDTO;
@@ -16,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/user")
 @Tag(name = "User", description = "用户接口")
@@ -56,5 +60,13 @@ public class UserController extends BaseController {
         boolean b = this.userService.deleteUser(id);
         if (!b) return ActionResult.fail(false, "删除用户失败");
         return ActionResult.success(true, "删除用户成功");
+    }
+
+    @GetMapping("/list")
+    @Operation(summary = "获取用户列表")
+    public ActionResult<IPage<SysUser>> list(BasePage page) {
+        log.info("page: {}", page);
+        IPage<SysUser> userList = this.userService.getUserByPage(page);
+        return ActionResult.success(userList, "获取用户列表成功");
     }
 }
