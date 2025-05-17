@@ -65,8 +65,10 @@ public class MenuController extends BaseController {
 
     @GetMapping("/tree")
     @Operation(summary = "获取菜单树")
-    public ActionResult<ArrayList<MenuTreeResponseDTO>> getMenuTree(@RequestParam(value = "menuTitle", required = false) String menuTitle) {
-        return ActionResult.success(this.menuService.getMenuTree(menuTitle), "获取菜单树成功");
+    public ActionResult<ArrayList<MenuTreeResponseDTO>> getMenuTree(@RequestParam(value = "menuTitle", required = false) String menuTitle,
+                                                                    @RequestParam(value = "type", required = false) String[] type
+    ) {
+        return ActionResult.success(this.menuService.getMenuTree(menuTitle, type), "获取菜单树成功");
     }
 
 }

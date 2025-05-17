@@ -51,5 +51,5 @@ public interface IMenuService {
      */
     SysMenu getMenuById(Long id);
 
-    ArrayList<MenuTreeResponseDTO> getMenuTree(String menuTitle);
+    ArrayList<MenuTreeResponseDTO> getMenuTree(String menuTitle, String[] type);
 }

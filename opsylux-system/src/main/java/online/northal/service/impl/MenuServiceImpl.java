@@ -11,10 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,9 +51,10 @@ public class MenuServiceImpl implements IMenuService {
     }
 
     @Override
-    public ArrayList<MenuTreeResponseDTO> getMenuTree(String menuTitle) {
+    public ArrayList<MenuTreeResponseDTO> getMenuTree(String menuTitle, String[] type) {
         LambdaQueryWrapper<SysMenu> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(menuTitle != null, SysMenu::getMenuTitle, menuTitle);
+        queryWrapper.in(SysMenu::getMenuType, Arrays.asList(type));
         List<SysMenu> sysMenus = this.menuMapper.selectList(queryWrapper);
         if (sysMenus.isEmpty()) {
             return new ArrayList<>();
