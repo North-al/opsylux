@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import online.northal.base.BaseController;
 import online.northal.domain.entity.SysMenu;
 import online.northal.dto.menu.MenuSaveRequestDTO;
+import online.northal.dto.menu.MenuTreeResponseDTO;
 import online.northal.response.ActionResult;
 import online.northal.service.IMenuService;
 import online.northal.validation.Create;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -59,6 +61,12 @@ public class MenuController extends BaseController {
         SysMenu menu = this.menuService.getMenuById(id);
         if (menu == null) return ActionResult.fail(null, "获取菜单详情失败");
         return ActionResult.success(menu, "获取菜单详情成功");
+    }
+
+    @GetMapping("/tree")
+    @Operation(summary = "获取菜单树")
+    public ActionResult<ArrayList<MenuTreeResponseDTO>> getMenuTree(@RequestParam(value = "menuTitle", required = false) String menuTitle) {
+        return ActionResult.success(this.menuService.getMenuTree(menuTitle), "获取菜单树成功");
     }
 
 }

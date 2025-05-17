@@ -3,8 +3,10 @@ package online.northal.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import online.northal.domain.entity.SysMenu;
 import online.northal.dto.menu.MenuSaveRequestDTO;
+import online.northal.dto.menu.MenuTreeResponseDTO;
 import online.northal.dto.user.UserSaveRequestDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IMenuService {
@@ -48,4 +50,6 @@ public interface IMenuService {
      * @return  菜单详情
      */
     SysMenu getMenuById(Long id);
+
+    ArrayList<MenuTreeResponseDTO> getMenuTree(String menuTitle);
 }

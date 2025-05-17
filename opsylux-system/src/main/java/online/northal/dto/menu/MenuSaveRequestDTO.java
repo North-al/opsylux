@@ -19,7 +19,4 @@ public class MenuSaveRequestDTO extends SysMenu {
 
     @NotBlank(message = "菜单标题不能为空", groups = {Create.class, Update.class})
     private String menuTitle;
-
-    @NotBlank(message = "菜单路径不能为空", groups = {Create.class, Update.class})
-    private String path;
 }
