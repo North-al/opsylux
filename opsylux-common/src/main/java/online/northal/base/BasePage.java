@@ -17,7 +17,7 @@ public class BasePage {
     @Schema(description = "搜索关键字", example = "keyword", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String keyword = "";
 
-    public <T> IPage <T> toPage() {
-        return new Page<>(this.page, this.limit);
+    public <T> IPage<T> toPage() {
+        return new Page<>(this.page == null ? 1 : this.page, this.limit == null ? 10 : this.limit);
     }
 }

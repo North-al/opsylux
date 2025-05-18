@@ -2,10 +2,11 @@ package online.northal.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import online.northal.base.BaseEntity;
 import online.northal.enums.UserGender;
-import online.northal.enums.UserStatus;
+import online.northal.enums.StatusEnum;
 
 @Data
 @NoArgsConstructor
@@ -29,7 +30,8 @@ public class SysUser extends BaseEntity {
 
     private UserGender gender;
 
-    private UserStatus status;
+    @Schema(description = "用户状态：0-正常，1-停用", example = "0")
+    private StatusEnum status;
 
     private String avatar;
 

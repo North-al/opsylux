@@ -41,12 +41,15 @@ public class SysMenu extends BaseEntity {
     @Schema(description = "菜单是否缓存：0 表示否，1 表示是", example = "0")
     private Integer isCache;
 
-    @Schema(description = "菜单状态：0 表示禁用，1 表示启用", example = "1")
+    @Schema(description = "菜单状态：0 表示正常，1 表示禁用", example = "0")
     private Integer status;
 
     @Schema(description = "菜单的权限标识", example = "system:menu:view")
     private String permission;
 
-    @Schema(description = "菜单图标", example = "el-icon-menu")
+    @Schema(description = "菜单图标", example = "menu")
     private String icon;
+
+    @Schema(description = "菜单排序", example = "1")
+    private Integer sort;
 }

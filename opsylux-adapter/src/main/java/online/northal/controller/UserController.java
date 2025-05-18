@@ -62,10 +62,9 @@ public class UserController extends BaseController {
         return ActionResult.success(true, "删除用户成功");
     }
 
-    @GetMapping("/list")
+    @GetMapping
     @Operation(summary = "获取用户列表")
     public ActionResult<IPage<SysUser>> list(BasePage page) {
-        log.info("page: {}", page);
         IPage<SysUser> userList = this.userService.getUserByPage(page);
         return ActionResult.success(userList, "获取用户列表成功");
     }

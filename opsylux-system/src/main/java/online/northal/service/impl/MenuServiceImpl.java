@@ -55,6 +55,7 @@ public class MenuServiceImpl implements IMenuService {
         LambdaQueryWrapper<SysMenu> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(menuTitle != null, SysMenu::getMenuTitle, menuTitle);
         queryWrapper.in(SysMenu::getMenuType, Arrays.asList(type));
+        queryWrapper.orderByAsc(SysMenu::getSort);
         List<SysMenu> sysMenus = this.menuMapper.selectList(queryWrapper);
         if (sysMenus.isEmpty()) {
             return new ArrayList<>();

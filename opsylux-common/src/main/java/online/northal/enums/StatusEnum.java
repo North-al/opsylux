@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum UserStatus {
+public enum StatusEnum {
     OK(0, "正常"),
     DISABLE(1, "停用");
 
