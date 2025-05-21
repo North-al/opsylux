@@ -64,8 +64,8 @@ public class UserController extends BaseController {
 
     @GetMapping
     @Operation(summary = "获取用户列表")
-    public ActionResult<IPage<SysUser>> list(BasePage page) {
-        IPage<SysUser> userList = this.userService.getUserByPage(page);
+    public ActionResult<IPage<UserProfileResponseDTO>> list(BasePage page) {
+        IPage<UserProfileResponseDTO> userList = this.userService.getUserByPage(page);
         return ActionResult.success(userList, "获取用户列表成功");
     }
 }

@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import online.northal.base.BasePage;
 import online.northal.domain.entity.SysUser;
+import online.northal.dto.user.UserProfileResponseDTO;
 import online.northal.dto.user.UserSaveRequestDTO;
 import online.northal.mapper.UserMapper;
 import online.northal.service.IUserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,9 +81,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public IPage<SysUser> getUserByPage(BasePage page) {
+    public IPage<UserProfileResponseDTO> getUserByPage(BasePage page) {
         LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(page.getKeyword() != null, SysUser::getUsername, page.getKeyword());
-        return this.userMapper.selectPage(page.toPage(), queryWrapper);
+        IPage<SysUser> sysUserIPage = this.userMapper.selectPage(page.toPage(), queryWrapper);
+        return sysUserIPage.convert(user -> {
+            UserProfileResponseDTO dto = new UserProfileResponseDTO();
+            BeanUtils.copyProperties(user, dto);
+            return dto;
+        });
     }
 }

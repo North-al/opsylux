@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import online.northal.base.BasePage;
 import online.northal.domain.entity.SysUser;
+import online.northal.dto.user.UserProfileResponseDTO;
 import online.northal.dto.user.UserSaveRequestDTO;
 
 public interface IUserService {
@@ -21,6 +22,6 @@ public interface IUserService {
 
     boolean deleteUser(Long id);
 
-    IPage<SysUser> getUserByPage(BasePage page);
+    IPage<UserProfileResponseDTO> getUserByPage(BasePage page);
 
 }
